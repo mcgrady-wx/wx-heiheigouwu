@@ -1,54 +1,45 @@
 //index.js
-//获取应用实例
-const app = getApp()
+
+import {request} from '../../request/index.js' //引入封装的请求
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    SwiperList:[],
+    cateList:[],
+    floorList:[]
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
+  onLoad(){//生命周期钩子函数,页面加载时.因数据不会频繁变化,使用onLoad.如数据频繁变化使用onShow
+    this.getSwiperList()
+    this.getCateList()
+    this.getFloorList()
+  },
+  //获取轮播图信息
+  getSwiperList(){
+    request({url:'/home/swiperdata'}).then(res=>{
+      //console.log(res)
+      const SwiperList=res
+      this.setData({
+        SwiperList
+      })
     })
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
+  //获取分类导航
+  getCateList(){
+    request({url:'/home/catitems'}).then(res=>{
+      const cateList=res
       this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+        cateList
       })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+    })
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+  //获得楼层显示数据
+  getFloorList(){
+    request({url:'/home/floordata'}).then(res=>{
+      const floorList=res
+      this.setData({
+        floorList
+      })
     })
   }
+  
 })

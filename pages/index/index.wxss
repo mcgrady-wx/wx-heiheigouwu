@@ -1,21 +1,44 @@
 /**index.wxss**/
-.userinfo {
+.hh_index swiper{
+  width: 100vw;
+  height: 340rpx;
+}
+.hh_index swiper image {
+  widows: 100%;
+}
+.hh_index .index_cate{
   display: flex;
-  flex-direction: column;
-  align-items: center;
 }
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.hh_index .index_cate navigator{
+  flex: 1;
+  padding: 20rpx;
 }
-
-.userinfo-nickname {
-  color: #aaa;
+.hh_index .index_cate navigator image{
+  width: 100%;
 }
-
-.usermotto {
-  margin-top: 200px;
+.hh_index .index_floor .floor_group .floor_title{
+  padding: 10rpx 0;
+} 
+.hh_index .index_floor .floor_group .floor_title image{
+  width: 100%;
+}
+.hh_index .index_floor .floor_group .floor_list navigator{
+  float: left;
+  width: 33.33%; 
+}
+ /*后四个图片是第一张的一半 原图的宽高 232 *386  容器的宽高是33.33vw*height 第一张的图片的height=33.33vw * 386 / 232 后四张是一半就再除以2*/
+.hh_index .index_floor .floor_group .floor_list .floor_list_nav3,
+.hh_index .index_floor .floor_group .floor_list .floor_list_nav4{
+  height:calc(33.33vw*386/232/2);
+  border-left: 10rpx solid  #fff;  
+}
+.hh_index .index_floor .floor_group .floor_list .floor_list_nav1,
+.hh_index .index_floor .floor_group .floor_list .floor_list_nav2{
+  height:calc(33.33vw*386/232/2);
+  border-left: 10rpx solid  #fff;
+  border-bottom: 10rpx solid #fff;
+}
+.hh_index .index_floor .floor_group .floor_list navigator image {
+  width: 100%;
+  height: 100%;
 }

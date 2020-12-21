@@ -1,13 +1,32 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+<view class="hh_index">
+  <!--搜索框-->
+  <SearchInput></SearchInput>
+  <!--轮播图-->
+  <swiper autoplay circular interval="3000" indicator-dots>
+    <swiper-item wx:for="{{SwiperList}}" wx:key="goods_id">
+      <navigator url="{{item.navigator_url}}" open-type="navigate">
+        <image src="{{item.image_src}}" mode="widthFix" lazy-load="false" >   </image>
+      </navigator>
+    </swiper-item>  
+  </swiper>
+  <!--分类菜单-->
+  <view class="index_cate">
+    <navigator url="/pages/category/index" open-type="switchTab" wx:for="{{cateList}}" wx:key="name">
+      <image mode="widthFix" src="{{item.image_src}}" ></image>
+    </navigator>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <!--首页楼层-->
+  <view class="index_floor">
+    <view class="floor_group" wx:for="{{floorList}}" wx:key="floor_title" wx:for-item="item1" wx:for-index="index1">
+      <view class="floor_title">
+        <image  src="{{item1.floor_title.image_src}}" mode="widthFix" lazy-load="false"></image>
+      </view>
+      <view class="floor_list" wx:for="{{item1.product_list}}" wx:key="name" wx:for-item="item2" wx:for-index="index2">
+        <navigator url="{{item2.navigator_url}}" open-type="navigate" class="floor_list_nav{{index2}}">
+          <image class="" src="{{item2.image_src}}" mode="{{index2===0?'widthFix':'scaleToFill'}}" lazy-load="false" binderror="" bindload=""></image>
+        </navigator>
+      </view>
+    </view>
   </view>
 </view>

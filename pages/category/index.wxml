@@ -1,2 +1,4 @@
 <!--pages/category/index.wxml-->
-<text>pages/category/index.wxml</text>
+<view class="cates">
+    <SearchInput></SearchInput>
+</view>
