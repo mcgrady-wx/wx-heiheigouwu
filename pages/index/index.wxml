@@ -1,4 +1,4 @@
-<!--index.wxml-->
+<!--首页-->
 <view class="hh_index">
   <!--搜索框-->
   <SearchInput></SearchInput>

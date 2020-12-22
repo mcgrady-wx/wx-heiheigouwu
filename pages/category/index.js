@@ -66,6 +66,19 @@ Page({
       leftMenuList,
       rightContent
     })
+  },
+  //点击切换分类列表
+  handleChangeItem(e){
+    //console.log(e.currentTarget.dataset)
+    const {index}=e.currentTarget.dataset
+    //右侧显示内容更换
+    let rightContent=this.Cates[index].children
+    this.setData({
+      currentIndex:index,
+      rightContent,
+      // 重新设置 右侧内容的scroll-view标签的距离顶部的距离
+      scrollTop: 0
+    })
   }
 
   
