@@ -105,7 +105,8 @@ Page({
     //查询当前商品是否在购物车数据中
     let index=cart.findIndex(v=>v.goods_id===this.goodsInfo.goods_id)
     if (index===-1) {//不存在
-      this.goodsInfo.num=1
+      this.goodsInfo.num=1 //商品数量
+      this.goodsInfo.checked=true //选中商品
       //添加到购物车数据中
       cart.push(this.goodsInfo)
     } else {//存在，就购买数量加1
