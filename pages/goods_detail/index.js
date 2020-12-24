@@ -38,7 +38,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    //因页面频繁被调用，所以不在onLoad中获取传递过来得参数
+    //因页面频繁被调用，所以不使用onLoad，onShow 无法在形参上接收 options参数 中获取传递过来得参数
     //获取当前页面栈。数组中第一个元素为首页，最后一个元素为当前页面
     let page=getCurrentPages() 
     //console.log(page)

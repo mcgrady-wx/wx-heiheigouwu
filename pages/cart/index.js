@@ -129,6 +129,32 @@ Page({
       allChecked
     })
     wx.setStorageSync('cart', cart);
+  },
+  //点击结算
+  handlePay(){
+    const {address,totalNum}=this.data;
+    //首先判断收货地址是否获取到
+    if (!address.userName) {
+      wx.showToast({
+        title: '请添加收货地址',
+        icon: 'none',      
+        mask: true,
+      });
+      return
+    }
+    //判断是否勾选了购买的商品
+    if (totalNum===0) {
+      wx.showToast({
+        title: '还没有商品被选中',
+        icon: 'none',      
+        mask: true,
+      });
+      return
+    }
+    //跳转到支付页面
+    wx.navigateTo({
+      url: '/pages/pay/index'
+    });
   }
   
 })
