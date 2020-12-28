@@ -123,7 +123,7 @@ Page({
       wx.setStorageSync('cart', newCart);
       //跳转到订单页面
       wx.redirectTo({
-        url: '/pages/order/index'
+        url: '/pages/order/index?type=1'
       });
     }
   }
