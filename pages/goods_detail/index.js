@@ -47,12 +47,18 @@ Page({
     //console.log(options)
     const { goods_id } = options;
     this.getGoodsDetail(goods_id);
+    //由于getGoodsDetail()方法是异步获取的，所以在onShow中无法获得全局变量goodsInfo的数据
+    //就不能在onShow中来判断该商品是否已经被收藏过，只能在请求回所有数据后来判断，即在getGoodsDetail（）中判断
+
   },
   async getGoodsDetail(goods_id){
     let res=await request({url:'/goods/detail',data:{goods_id}})
     //console.log(res)
     //保存商品详情
     this.goodsInfo=res
+    //获得缓存中的收藏数据，来判断该商品是否被收藏，确定收藏图标的样式
+    let collect=wx.getStorageSync('collect') || [];
+    let isCollect=collect.some(v=>v.goods_id===this.goodsInfo.goods_id)
     //获取需要在页面显示得数据
     this.setData({
       goodsObj: {
@@ -63,7 +69,8 @@ Page({
         // 临时自己改 确保后台存在 1.webp => 1.jpg 
         goods_introduce: res.goods_introduce.replace(/\.webp/g, '.jpg'),
         pics: res.pics
-      }
+      },
+      isCollect
     })
   },
   //点击图片显示大图
@@ -118,6 +125,40 @@ Page({
   //需要botton的open-type="share"，用于转发分享事件
   onShareAppMessage(res){
     console.log(res)
+  },
+  //点击收藏
+  handleCollect(){
+    //获得缓存中的收藏数据，来判断该商品是否被收藏
+    let collect=wx.getStorageSync('collect') || [];
+    let index=collect.findIndex(v=>v.goods_id===this.goodsInfo.goods_id)
+    //判断
+    if (index !== -1) {
+      //已经收藏，删除收藏列表中该商品、保存新的收藏列表到缓存、把isCollect置为false
+      collect.splice(index,1)
+      wx.setStorageSync('collect', collect);
+      this.setData({
+        isCollect:false
+      })
+      //弹窗提示
+      wx.showToast({
+        title: '取消成功',
+        icon: 'success',
+        mask: false,
+      });
+    } else {
+      //没有收藏，添加该商品到收藏列表、保存新的收藏列表到缓存、把isCollect置为true
+      collect.push(this.goodsInfo)
+      wx.setStorageSync('collect', collect);
+      this.setData({
+        isCollect:true
+      })
+      //弹窗提示
+      wx.showToast({
+        title: '收藏成功',
+        icon: 'success',
+        mask: false,
+      });
+    }
   }
   
 })

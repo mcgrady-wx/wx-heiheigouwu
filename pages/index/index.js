@@ -17,6 +17,11 @@ Page({
   getSwiperList(){
     request({url:'/home/swiperdata'}).then(res=>{
       //console.log(res)
+      //处理获得的跳转路径不对的问题
+      res.forEach(element => {
+        //console.log(element.navigator_url.split("?"))
+        element.navigator_url_right='/pages/goods_detail/index?'+ element.navigator_url.split("?")[1]
+      });
       const SwiperList=res
       this.setData({
         SwiperList
@@ -35,6 +40,13 @@ Page({
   //获得楼层显示数据
   getFloorList(){
     request({url:'/home/floordata'}).then(res=>{
+      //处理获得的跳转路径不对的问题
+      res.forEach(element => {
+        element.product_list.forEach(v=>{
+          //console.log(v.navigator_url.split("?"))
+          v.navigator_url_right='/pages/goods_list/index?'+ v.navigator_url.split("?")[1]
+        })
+      });
       const floorList=res
       this.setData({
         floorList

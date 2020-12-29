@@ -5,7 +5,7 @@
   <!--轮播图-->
   <swiper autoplay circular interval="3000" indicator-dots>
     <swiper-item wx:for="{{SwiperList}}" wx:key="goods_id">
-      <navigator url="{{item.navigator_url}}" open-type="navigate">
+      <navigator url="{{item.navigator_url_right}}" open-type="navigate">
         <image src="{{item.image_src}}" mode="widthFix" lazy-load="false" >   </image>
       </navigator>
     </swiper-item>  
@@ -23,7 +23,7 @@
         <image  src="{{item1.floor_title.image_src}}" mode="widthFix" lazy-load="false"></image>
       </view>
       <view class="floor_list" wx:for="{{item1.product_list}}" wx:key="name" wx:for-item="item2" wx:for-index="index2">
-        <navigator url="{{item2.navigator_url}}" open-type="navigate" class="floor_list_nav{{index2}}">
+        <navigator url="{{item2.navigator_url_right}}" open-type="navigate" class="floor_list_nav{{index2}}">
           <image class="" src="{{item2.image_src}}" mode="{{index2===0?'widthFix':'scaleToFill'}}" lazy-load="false" binderror="" bindload=""></image>
         </navigator>
       </view>
