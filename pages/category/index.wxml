@@ -3,8 +3,8 @@
     <SearchInput></SearchInput>
     <view class="cates_container">
         <!--左侧-->
-        <scroll-view class="left_menu" scroll-y="true">
-            <view class="menu_item {{index===currentIndex?'active':''}}" wx:for="{{leftMenuList}}" wx:key="*this" bindtap = "handleChangeItem" data-index="{{index}}">
+        <scroll-view class="left_menu" scroll-y="true" scroll-into-view="{{toView}}">
+            <view id="{{'view'+index}}" class="menu_item {{index===currentIndex?'active':''}}" wx:for="{{leftMenuList}}" wx:key="*this" bindtap = "handleChangeItem" data-index="{{index}}">
                 {{item}}
             </view>
         </scroll-view>

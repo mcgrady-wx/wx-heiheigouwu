@@ -15,7 +15,9 @@ Page({
     // 被点击的左侧的菜单
     currentIndex: 0,
     // 右侧内容的滚动条距离顶部的距离
-    scrollTop: 0
+    scrollTop: 0,
+    //点击滚动到对应的位置
+    toView:''
   },
   //保存请求下来的所有数据
   Cates:[],
@@ -77,7 +79,9 @@ Page({
       currentIndex:index,
       rightContent,
       // 重新设置 右侧内容的scroll-view标签的距离顶部的距离
-      scrollTop: 0
+      scrollTop: 0,
+      //点击滚动到对应元素
+      toView:'view'+index
     })
   }
 
